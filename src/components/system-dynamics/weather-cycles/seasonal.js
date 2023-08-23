@@ -1,0 +1,5 @@
+/*
+Heating season
+Cooling season
+Transition season
+*/
