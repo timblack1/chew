@@ -35,8 +35,8 @@ export class PvPanel extends LitElement {
       depth: 0,
       weight: 0,
       // Electrical
-      watts: 0,
-      voc: 0,
+      maximumPower: 0,
+      openCircuitVoltage: 0,
       isc: 0,
       vmp: 0,
       imp: 0,
