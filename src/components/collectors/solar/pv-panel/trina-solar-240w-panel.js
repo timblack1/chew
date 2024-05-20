@@ -16,7 +16,7 @@ export class TrinaSolar240WPanel extends PvPanel {
       manufacturer: {
         name: 'Trina Solar',
         url: 'https://www.trinasolar.com/us',
-        modelNumber: 'TSM-240PA05.08',
+        modelNumber: 'TSM-240PC/PA05',
       },
       supplier: {
         // In dollars
@@ -40,6 +40,8 @@ export class TrinaSolar240WPanel extends PvPanel {
       electricalSTC: {
         // Peak power watts
         pmax: 240,
+        // STC power per unit of area, W/m²
+        pmaxArea: 146.6,
         // Open circuit voltage
         voc: 37.2,
         // Maximum power voltage
@@ -48,17 +50,13 @@ export class TrinaSolar240WPanel extends PvPanel {
         isc: 8.37,
         // Maximum power current
         imp: 7.89,
-        // Module efficiency
+        // Module peak efficiency
         efficiency: 14.7,
         maxSystemVoltage: 600,
         // Maximum series fuse rating
         fuseRatingAmps: 15,
-        internalResistance: 0,
-        // Thermal
-        tnoct: 0,
-        temperatureGainPerWattIrradiance: 0,
-        // See https://www.solar.com/learn/does-solar-panel-temperature-coefficient-matter/
-        tcoeff: 0,
+        // TODO: Verify this experimentally
+        internalResistance: this.voc / this.isc,
       },
 
       // Electrical @ NOCT
@@ -80,7 +78,7 @@ export class TrinaSolar240WPanel extends PvPanel {
       // Mechanical
       mechanical: {
         // Cell type
-        cellType: 'Polycrystalline',
+        cellType: 'Polycrystalline silicon',
         // Number of cells
         cellCount: 60, // 6x10
         // Cell dimensions
@@ -91,8 +89,8 @@ export class TrinaSolar240WPanel extends PvPanel {
         moduleDimensions: {
           // In millimeters
           // See spec sheet for precise installing, grounding, drain hole locations
-          width: 812,
-          height: 992,
+          width: 992,
+          height: 1650,
           depth: 35,
           frameWidth: 35,
         },
@@ -102,6 +100,8 @@ export class TrinaSolar240WPanel extends PvPanel {
         glassType: 'High transparency solar glass 3.2mm (0.13 inches)',
         // Frame type
         frameType: 'Anodized aluminum alloy',
+        // Backsheet color
+        backsheetColor: 'white',
         // Junction box
         junctionBox: {
           // Protection class
@@ -112,6 +112,11 @@ export class TrinaSolar240WPanel extends PvPanel {
             crossSection: 4,
             // Cable length
             length: 1000, // +- 10
+            // Output cable wire gauge, AWG
+            wireGauge: 12,
+            // Output wire type
+            // TODO: Confirm this; else "PV Wire"
+            wireType: 'PV1-F',
           },
           // Connector type
           connectorType: 'MC4',
@@ -120,6 +125,7 @@ export class TrinaSolar240WPanel extends PvPanel {
 
       // Temperature ratings
       temperature: {
+        // See https://www.solar.com/learn/does-solar-panel-temperature-coefficient-matter/
         // Nominal operating cell temperature
         noct: 45,
         // Temperature coefficient of Pmax, %/°C
@@ -128,6 +134,8 @@ export class TrinaSolar240WPanel extends PvPanel {
         voc: -0.32,
         // Temperature coefficient of Isc, %/°C
         isc: 0.047,
+        // TODO: Can we use this value?
+        temperatureGainPerWattIrradiance: 0,
       },
 
       // Maximum ratings
@@ -147,6 +155,10 @@ export class TrinaSolar240WPanel extends PvPanel {
         // Maximum series fuse rating
         fuseRatingAmps: 15,
       },
+
+      // Compliances
+      compliances: 'UL 1703, TUV',
+      CSIListed: true,
     };
   }
 
